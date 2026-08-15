@@ -4,63 +4,421 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Heart English Library</title>
+
 <style>
-:root{--bg:#f6f5f0;--card:#fff;--ink:#171717;--muted:#777;--line:#e5e3dc}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink)}
-.wrap{max-width:430px;margin:auto;min-height:100vh;padding-bottom:32px}
-.top{position:sticky;top:0;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;z-index:5}
-.brand{font-size:12px;font-weight:900;letter-spacing:.11em}.back{border:1px solid var(--line);background:white;border-radius:999px;padding:8px 12px;font-weight:800}
-main{padding:24px 18px} .kicker{font-size:10px;font-weight:900;letter-spacing:.11em;color:#888}
-h1{font-size:30px;line-height:1.1;margin:8px 0}.intro{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:22px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:11px 0;box-shadow:0 4px 14px rgba(0,0,0,.025)}
-.card.active{cursor:pointer}.row{display:flex;align-items:center;gap:12px}.icon{font-size:24px}.title{font-size:18px;font-weight:900}.desc{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45}.arrow{margin-left:auto;font-weight:900}
-.status{display:inline-block;margin-top:10px;font-size:10px;font-weight:900;padding:6px 9px;border-radius:999px;background:#efeee8;color:#777}
-.status.ready{background:#171717;color:white}
+:root{
+  --bg:#f6f5f0;
+  --card:#fff;
+  --ink:#171717;
+  --muted:#777;
+  --line:#e5e3dc;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--ink);
+}
+
+.wrap{
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:32px;
+}
+
+.top{
+  position:sticky;
+  top:0;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:5;
+}
+
+.brand{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.11em;
+}
+
+.back{
+  border:1px solid var(--line);
+  background:white;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+main{
+  padding:24px 18px;
+}
+
+.kicker{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.11em;
+  color:#888;
+}
+
+h1{
+  font-size:30px;
+  line-height:1.1;
+  margin:8px 0;
+}
+
+.intro{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  margin:11px 0;
+  box-shadow:0 4px 14px rgba(0,0,0,.025);
+}
+
+.card.active{
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+.card.active:hover{
+  transform:translateY(-1px);
+  box-shadow:0 7px 18px rgba(0,0,0,.05);
+}
+
+.card.active:active{
+  transform:scale(.99);
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.icon{
+  font-size:24px;
+  width:32px;
+  flex-shrink:0;
+}
+
+.content{
+  flex:1;
+}
+
+.title{
+  font-size:18px;
+  font-weight:900;
+}
+
+.desc{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:5px;
+  line-height:1.45;
+}
+
+.arrow{
+  margin-left:auto;
+  font-size:18px;
+  font-weight:900;
+}
+
+.status{
+  display:inline-block;
+  margin-top:10px;
+  font-size:10px;
+  font-weight:900;
+  padding:6px 9px;
+  border-radius:999px;
+}
+
+.status.ready{
+  background:#171717;
+  color:white;
+}
 </style>
 </head>
+
 <body>
 
 <script>
 (function(){
+
   const name = localStorage.getItem('heartStudentName');
-  const cls  = localStorage.getItem('heartStudentClass');
-  const sid  = localStorage.getItem('heartStudentId');
+  const cls = localStorage.getItem('heartStudentClass');
+  const sid = localStorage.getItem('heartStudentId');
+
   if(!name || !cls){
     location.replace('/');
     return;
   }
-  window.HEART_STUDENT = {name:name, className:cls, studentId:sid||''};
+
+  window.HEART_STUDENT = {
+    name:name,
+    className:cls,
+    studentId:sid || ''
+  };
+
 })();
 </script>
+
+
 <div class="wrap">
-<div class="top"><div class="brand">HEART ENGLISH</div><button class="back" onclick="location.href='/'">← Home</button></div>
-<main>
-<div class="kicker">LEARN LIBRARY</div>
-<h1>무엇을 공부할까요?</h1>
-<div class="intro">필요한 영어를 골라서 공부하세요. 완성된 콘텐츠부터 하나씩 연결됩니다.</div>
 
-<div class="card active" onclick="location.href='/travel'">
- <div class="row"><div class="icon">✈️</div><div><div class="title">여행영어</div><div class="desc">한국어 → Flip → Listen → Speak</div></div><div class="arrow">→</div></div>
- <span class="status ready">READY</span>
+
+  <!-- TOP BAR -->
+
+  <div class="top">
+
+    <div class="brand">
+      HEART ENGLISH
+    </div>
+
+    <button
+      class="back"
+      onclick="location.href='/'"
+    >
+      ← Home
+    </button>
+
+  </div>
+
+
+  <main>
+
+
+    <div class="kicker">
+      LEARN LIBRARY
+    </div>
+
+
+    <h1>
+      무엇을 공부할까요?
+    </h1>
+
+
+    <div class="intro">
+      필요한 영어를 골라서 공부하세요.<br>
+      원하는 Library에서 바로 학습을 시작할 수 있습니다.
+    </div>
+
+
+
+    <!-- TRAVEL ENGLISH -->
+
+    <div
+      class="card active"
+      onclick="location.href='/travel'"
+    >
+
+      <div class="row">
+
+        <div class="icon">
+          ✈️
+        </div>
+
+        <div class="content">
+
+          <div class="title">
+            여행영어
+          </div>
+
+          <div class="desc">
+            한국어 → Flip → Listen → Speak
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          →
+        </div>
+
+      </div>
+
+      <span class="status ready">
+        READY
+      </span>
+
+    </div>
+
+
+
+    <!-- BUSINESS ENGLISH -->
+
+    <div
+      class="card active"
+      onclick="location.href='/business'"
+    >
+
+      <div class="row">
+
+        <div class="icon">
+          💼
+        </div>
+
+        <div class="content">
+
+          <div class="title">
+            비즈니스 영어
+          </div>
+
+          <div class="desc">
+            Business Essentials · Upgrade
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          →
+        </div>
+
+      </div>
+
+      <span class="status ready">
+        READY
+      </span>
+
+    </div>
+
+
+
+    <!-- EVERYDAY ENGLISH -->
+
+    <div
+      class="card active"
+      onclick="location.href='/everyday'"
+    >
+
+      <div class="row">
+
+        <div class="icon">
+          💬
+        </div>
+
+        <div class="content">
+
+          <div class="title">
+            생활영어
+          </div>
+
+          <div class="desc">
+            일상에서 바로 꺼내 쓰는 자연스러운 표현
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          →
+        </div>
+
+      </div>
+
+      <span class="status ready">
+        READY
+      </span>
+
+    </div>
+
+
+
+    <!-- GRAMMAR CLINIC -->
+
+    <div
+      class="card active"
+      onclick="location.href='/grammar'"
+    >
+
+      <div class="row">
+
+        <div class="icon">
+          ✍️
+        </div>
+
+        <div class="content">
+
+          <div class="title">
+            자주 틀리는 문법
+          </div>
+
+          <div class="desc">
+            말할 때 반복되는 실수를 바로잡는 Grammar Clinic
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          →
+        </div>
+
+      </div>
+
+      <span class="status ready">
+        READY
+      </span>
+
+    </div>
+
+
+
+    <!-- CLASS REVIEW -->
+
+    <div
+      class="card active"
+      onclick="location.href='/review'"
+    >
+
+      <div class="row">
+
+        <div class="icon">
+          📖
+        </div>
+
+        <div class="content">
+
+          <div class="title">
+            교재학습
+          </div>
+
+          <div class="desc">
+            수업에서 배운 표현을 다시 꺼내 말하는 Review
+          </div>
+
+        </div>
+
+        <div class="arrow">
+          →
+        </div>
+
+      </div>
+
+      <span class="status ready">
+        READY
+      </span>
+
+    </div>
+
+
+  </main>
+
 </div>
 
-<div class="card">
- <div class="row"><div class="icon">💼</div><div><div class="title">비즈니스 영어</div><div class="desc">Business Essentials · Upgrade</div></div></div>
- <span class="status">COMING NEXT</span>
-</div>
 
-<div class="card">
- <div class="row"><div class="icon">💬</div><div><div class="title">생활영어</div><div class="desc">일상에서 바로 꺼내 쓰는 자연스러운 표현</div></div></div>
- <span class="status">COMING NEXT</span>
-</div>
-
-<div class="card">
- <div class="row"><div class="icon">✍️</div><div><div class="title">자주 틀리는 문법</div><div class="desc">말할 때 반복되는 실수를 바로잡는 Grammar Clinic</div></div></div>
- <span class="status">COMING NEXT</span>
-</div>
-
-<div class="card">
- <div class="row"><div class="icon">📖</div><div><div class="title">교재학습</div><div class="desc">수업에서 배운 표현을 다시 꺼내 말하는 Review</div></div></div>
- <span class="status">COMING NEXT</span>
-</div>
-</main></div></body></html>
+</body>
+</html>
