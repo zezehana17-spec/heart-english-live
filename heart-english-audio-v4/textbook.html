@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>교재학습 · Heart English</title><style>body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f6f5f0;margin:0;color:#171717}main{max-width:430px;margin:auto;padding:30px 20px}a{color:#171717;font-weight:800}.box{margin-top:80px;background:white;border:1px solid #e5e3dc;border-radius:22px;padding:24px}h1{font-size:28px}</style></head>
+<body>
+
+<script>
+(function(){
+  const name = localStorage.getItem('heartStudentName');
+  const cls  = localStorage.getItem('heartStudentClass');
+  const sid  = localStorage.getItem('heartStudentId');
+  if(!name || !cls){
+    location.replace('/');
+    return;
+  }
+  window.HEART_STUDENT = {name:name, className:cls, studentId:sid||''};
+})();
+</script>
+<main><a href="/learn">← Library</a><div class="box"><div style="font-size:32px">📖</div><h1>교재학습</h1><p>수업에서 배운 표현을 복습하고 다시 말하기</p><p>콘텐츠를 완성한 뒤 이 페이지 내용만 교체하면 됩니다.</p></div></main></body></html>
